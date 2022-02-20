@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="垃圾判断算法1）引用计数法 缺点：无法解决循环引用的问题 2）可达性分析算法 可作为GC ROOT的对象：">
+  <meta name="description" content="yolox的改进由于yoloV4和yoloV5存在过度优化的问题，因此yoloX以yoloV3和Darknet 53为基线，采用了Darknet 53骨干网的结构架构和SPP层，改变了一些训练策略： 1）增加了EMA权重更新、consine lr schedule、IoU损失和IoU感知分支，使用BCE Loss训练cls和obj，IoU Loss作为test分支。 2）由于RandomResiz">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JVM垃圾回收机制">
-<meta property="og:url" content="http://example.com/2021/09/15/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/index.html">
+<meta property="og:title" content="yoloX算法详解">
+<meta property="og:url" content="http://example.com/2022/01/26/yolox/index.html">
 <meta property="og:site_name" content="Eren Jaeger&#39;s blog">
-<meta property="og:description" content="垃圾判断算法1）引用计数法 缺点：无法解决循环引用的问题 2）可达性分析算法 可作为GC ROOT的对象：">
+<meta property="og:description" content="yolox的改进由于yoloV4和yoloV5存在过度优化的问题，因此yoloX以yoloV3和Darknet 53为基线，采用了Darknet 53骨干网的结构架构和SPP层，改变了一些训练策略： 1）增加了EMA权重更新、consine lr schedule、IoU损失和IoU感知分支，使用BCE Loss训练cls和obj，IoU Loss作为test分支。 2）由于RandomResiz">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-09-14T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-02-20T15:31:42.969Z">
+<meta property="article:published_time" content="2022-01-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-02-20T16:18:33.761Z">
 <meta property="article:author" content="Zhenyu Liang">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2021/09/15/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/">
+<link rel="canonical" href="http://example.com/2022/01/26/yolox/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>JVM垃圾回收机制 | Eren Jaeger's blog</title>
+  <title>yoloX算法详解 | Eren Jaeger's blog</title>
   
 
 
@@ -161,7 +161,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/15/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/26/yolox/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/header.jpg">
@@ -174,7 +174,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          JVM垃圾回收机制
+          yoloX算法详解
         </h1>
 
         <div class="post-meta">
@@ -184,14 +184,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-09-15 00:00:00" itemprop="dateCreated datePublished" datetime="2021-09-15T00:00:00+08:00">2021-09-15</time>
+              <time title="创建时间：2022-01-26 00:00:00" itemprop="dateCreated datePublished" datetime="2022-01-26T00:00:00+08:00">2022-01-26</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-02-20 23:31:42" itemprop="dateModified" datetime="2022-02-20T23:31:42+08:00">2022-02-20</time>
+                <time title="修改时间：2022-02-21 00:18:33" itemprop="dateModified" datetime="2022-02-21T00:18:33+08:00">2022-02-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -199,7 +199,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
+                  <a href="/categories/deep-learning/" itemprop="url" rel="index"><span itemprop="name">deep learning</span></a>
                 </span>
             </span>
 
@@ -214,34 +214,44 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="垃圾判断算法"><a href="#垃圾判断算法" class="headerlink" title="垃圾判断算法"></a>垃圾判断算法</h2><p>1）引用计数法</p>
-<p>缺点：无法解决循环引用的问题</p>
-<p>2）可达性分析算法</p>
-<p>可作为GC ROOT的对象：</p>
+        <h2 id="yolox的改进"><a href="#yolox的改进" class="headerlink" title="yolox的改进"></a>yolox的改进</h2><p>由于yoloV4和yoloV5存在过度优化的问题，因此yoloX以yoloV3和Darknet 53为基线，采用了Darknet 53骨干网的结构架构和SPP层，改变了一些训练策略：</p>
+<p>1）增加了EMA权重更新、consine lr schedule、IoU损失和IoU感知分支，使用BCE Loss训练cls和obj，IoU Loss作为test分支。</p>
+<p>2）由于RandomResizedCrop和马赛克增强重叠，因此只采用了RandomHorizontalFlip，ColorJitter、multi-scale和mosaic用于数据增强。</p>
 <span id="more"></span>
 
+<p>3）使用Mixup增强，不使用Imagenet预训练方法。</p>
+<h2 id="Decoupled-Head（解耦头部）"><a href="#Decoupled-Head（解耦头部）" class="headerlink" title="Decoupled Head（解耦头部）"></a>Decoupled Head（解耦头部）</h2><p>思想：分离分类和定位操作</p>
+<p>好处：（1）提高了了yoloX收敛速度；（2）实现了yolo的端对端性能。</p>
+<p>YOLOv3与yoloX解耦头之间的区别。对于每一层FPN特征，我们首先采用1 × 1的conv层，将特征通道减少到256，然后再增加两个并行分支，每个分支有两个3 × 3个卷积层分别用于分类和回归任务。IoU分支被添加到回归分支上。</p>
+<h2 id="免锚"><a href="#免锚" class="headerlink" title="免锚"></a>免锚</h2><p>无锚机制的优点：减少了设计参数的数量</p>
+<p>实现方式：将每个位置的预测从3个减少到1个，并使他们直接预测4个值（即网格左上角的两个偏移量、预测框的高度和宽度）。同时指定了中心，每个物体的阳离子作为正样本，并预先定义一个刻度方位以指定每个物体的FPN级别，可以降低探测器的参数和GFLOPs，使其速度更快，性能更好。</p>
+<h2 id="多个正样本"><a href="#多个正样本" class="headerlink" title="多个正样本"></a>多个正样本</h2><p>操作：参照FCOS中的‘中心取样’，只为每个对象的平均值选择了一个正样本（中心位置），忽略其他高质量的预测。</p>
+<p>优点：（1）有利于梯度回归；（2）缓解训练中的正负样本不均衡</p>
+<h2 id="SimOTA（高级标签分配）"><a href="#SimOTA（高级标签分配）" class="headerlink" title="SimOTA（高级标签分配）"></a>SimOTA（高级标签分配）</h2><p>四个关键点：（1）loss&#x2F;quality loss （2）cneter prior （3）每个GT的正样本anchor动态个数 （4）全局试图</p>
+<p>整体逻辑：</p>
 <ul>
-<li>虚拟机栈中引用的对象</li>
-<li>方法区中类静态属性引用的对象</li>
-<li>方法区中常量引用的对象</li>
-<li>本地方法栈中JNI引用的对象</li>
+<li><p>确定正样本候选区域</p>
+</li>
+<li><p>计算anchor与gt的IoU</p>
+</li>
+<li><p>在候选区域计算cost</p>
+</li>
+<li><p>使用IoU确定每个gt的dynamic_k</p>
+</li>
+<li><p>为每个gt取cost排名最小的前dynamic_k个anchor作为正样本，其余为负样本</p>
+</li>
+<li><p>使用正负样本计算loss</p>
+<p>具体细节：<br>1、dynamic_k确定方式：</p>
+<ul>
+<li><p>获取与当前gt有top10最大IoU的prediction结果</p>
+</li>
+<li><p>将这top10IoU进行sum，就为当前gt的dynamic_k，dynamic_k最小取1</p>
+<p>由于前期模型预测不准，导致IoU基本比较小，所以观测到前期dynamic_k大多为1</p>
+</li>
 </ul>
-<h2 id="垃圾回收算法"><a href="#垃圾回收算法" class="headerlink" title="垃圾回收算法"></a>垃圾回收算法</h2><p>1）标记-清除算法</p>
-<p>一个很大的问题：内存碎片</p>
-<p>2）复制算法</p>
-<p>将可用内存按容量划分为大小相等的两块，每次只使用其中的一块，当这一块的内存使用完了，就将还存活着的对象复制到另外一块上面，然后再把已使用过的内存空间一次清理掉，保证内存连续可用，但问题是：例如硬盘本来有500G，但却只能用200G，代价太高。</p>
-<p>3）标记-整理算法</p>
-<p>标记-整理算法标记过程仍然与标记-清除算法一样，但后续步骤不是直接对可回收对象进行清理，而是让所有存活的对象都向一端移动，再清理掉端边界以外的内存区域。</p>
-<p>4）分代收集算法</p>
-<p>分代收集算法分代收集算法严格来说并不是一种思想或理论，而是融合上述3种基础的算法思想，而产生的针对不同情况所采用不同算法的一套组合拳，根据对象存活周期的不同将内存划分为几块。</p>
-<p>在新生代中，每次垃圾收集时都发现有大批对象死去，只有少量存活，那就选用复制算法，只需要付出少量存活对象的复制成本就可以完成收集。</p>
-<p>在老年代中，因为对象存活率高、没有额外空间对它进行分配担保，就必须使用标记-清除算法或者标记-整理算法来进行回收。</p>
-<h2 id="内存区域和回收策略"><a href="#内存区域和回收策略" class="headerlink" title="内存区域和回收策略"></a>内存区域和回收策略</h2><p>对象优先在Eden分配</p>
-<p>通过Minor GC之后，Eden区中绝大部分对象会被回收，而那些存活对象，将会送到Survivor的From区</p>
-<p>Survivor区相当于是Eden区和Old区的一个缓冲，类似于我们交通灯中的黄灯。Survivor又分为2个区，一个是From区，一个是To区。每次执行Minor GC，会将Eden区中存活的对象放到Survivor的From区，而在From区中，仍存活的对象会根据他们的年龄值来决定去向。（From Survivor和To Survivor的逻辑关系会发生颠倒： From变To ， To变From，目的是保证有连续的空间存放对方，避免碎片化的发生。</p>
-<p>Survivor区存在的意义：Survivor的存在意义就是减少被送到老年代的对象，进而减少Major GC的发生。Survivor的预筛选保证，只有经历16次Minor GC还能在新生代中存活的对象，才会被送到老年代。</p>
-<p>大对象直接进入老年代：这样做的目的是避免在Eden区及两个Survivor区之间发生大量的内存复制。（新生代采用的是复制算法）</p>
-<p>长期存活的对象将进入老年代。</p>
+<p>2、计算cost时候，Lcls和Lreg比例是1:3，而最终计算loss时，Lcls和Lreg比例是1:5，原因是：在寻找正样本时，如果一个anchor已经能很好的区分前景和背景，那即使reg预测不准，也可以作为正样本，所以相比于loss计算，在cost计算时，Lcls给予更多权重，而reg可以通过不断地训练逐步优化。</p>
+</li>
+</ul>
 
     </div>
 
@@ -256,11 +266,11 @@
 
         
     <div class="post-nav">
-      <div class="post-nav-item"></div>
       <div class="post-nav-item">
-    <a href="/2021/09/16/JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" rel="next" title="JVM内存模型">
-      JVM内存模型 <i class="fa fa-chevron-right"></i>
+    <a href="/2021/12/01/mysql%E7%B4%A2%E5%BC%95/" rel="prev" title="MySQL索引">
+      <i class="fa fa-chevron-left"></i> MySQL索引
     </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -319,7 +329,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%88%A4%E6%96%AD%E7%AE%97%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">垃圾判断算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">垃圾回收算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F%E5%92%8C%E5%9B%9E%E6%94%B6%E7%AD%96%E7%95%A5"><span class="nav-number">3.</span> <span class="nav-text">内存区域和回收策略</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#yolox%E7%9A%84%E6%94%B9%E8%BF%9B"><span class="nav-number">1.</span> <span class="nav-text">yolox的改进</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Decoupled-Head%EF%BC%88%E8%A7%A3%E8%80%A6%E5%A4%B4%E9%83%A8%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">Decoupled Head（解耦头部）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%8D%E9%94%9A"><span class="nav-number">3.</span> <span class="nav-text">免锚</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E4%B8%AA%E6%AD%A3%E6%A0%B7%E6%9C%AC"><span class="nav-number">4.</span> <span class="nav-text">多个正样本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SimOTA%EF%BC%88%E9%AB%98%E7%BA%A7%E6%A0%87%E7%AD%BE%E5%88%86%E9%85%8D%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">SimOTA（高级标签分配）</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
