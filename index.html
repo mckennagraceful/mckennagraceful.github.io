@@ -158,6 +158,83 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/25/%E4%BA%BA%E4%BD%93%E5%8A%A8%E4%BD%9C%E8%AF%86%E5%88%AB%E4%BB%BB%E5%8A%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/header.jpg">
+      <meta itemprop="name" content="Zhenyu Liang">
+      <meta itemprop="description" content="世界は残酷だ それでも君を愛すよ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Eren Jaeger's blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/03/25/%E4%BA%BA%E4%BD%93%E5%8A%A8%E4%BD%9C%E8%AF%86%E5%88%AB%E4%BB%BB%E5%8A%A1/" class="post-title-link" itemprop="url">人体动作识别任务</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-03-25 00:00:00 / Modified: 21:09:01" itemprop="dateCreated datePublished" datetime="2022-03-25T00:00:00+08:00">2022-03-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/deep-learning/" itemprop="url" rel="index"><span itemprop="name">deep learning</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="动作识别任务概述"><a href="#动作识别任务概述" class="headerlink" title="动作识别任务概述"></a>动作识别任务概述</h2><p>动作识别任务用到的方法总体上分为两种，一种是基于传统的手工提取特征方法，其主要是基于兴趣点的检测和表示，利用梯度直方图、时空兴趣点、改进型密集轨迹等构建特征进行分类，然而这种方法缺乏一定的灵活性与可扩展性；另一种方法是基于深度学习自动提取特征的方法，也是现阶段动作识别领域主流的方法，其主要有三个分支，分别是双流卷积神经网络、LSTM以及3D卷积神经网络。不同的网络模型有不同的特点与优势。</p>
+<p>在对双流卷积神经网络的研究中，Simonyan等人提出了一种分别使用RGB和叠层光流帧作为外观和运动信息的方法，表明将这两种流结合起来可以提高动作识别的精度。自这项研究以来，人们提出了许多基于双流CNN的方法来提高动作识别性能。</p>
+<p>LSTM（Long Short-Term Memory）名为长短期记忆网络，是循环神经网络（Recurrent Neural Network, RNN）的一种变体，可以利用其特有的结构处理好时间序列较长的事件。而视频中的运动是一个由几百帧甚至上千帧组成的持续过程，因此在动作识别中，如何提取物体运动的详细信息、时间跨度较大的相关性信息显得至关重要。LSTM网络之所以能在处理长时相关性事件中占据优势，主要在于LSTM单元中加入了用来处理信息的门操作，分别包括遗忘门、输入门和输出门三种。通过这种门操作，对较长时间的事件信息进行记忆，保留或者是丢弃操作，以此来动态地调整信息的状态，强化长时间信息的表达能力，而这也很符合人类对事件的认知过程。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/03/25/%E4%BA%BA%E4%BD%93%E5%8A%A8%E4%BD%9C%E8%AF%86%E5%88%AB%E4%BB%BB%E5%8A%A1/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/26/yolox/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -912,92 +989,11 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/15/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/header.jpg">
-      <meta itemprop="name" content="Zhenyu Liang">
-      <meta itemprop="description" content="世界は残酷だ それでも君を愛すよ">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Eren Jaeger's blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/09/15/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/" class="post-title-link" itemprop="url">JVM垃圾回收机制</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2021-09-15 00:00:00" itemprop="dateCreated datePublished" datetime="2021-09-15T00:00:00+08:00">2021-09-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-02-20 23:31:42" itemprop="dateModified" datetime="2022-02-20T23:31:42+08:00">2022-02-20</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index"><span itemprop="name">java</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="垃圾判断算法"><a href="#垃圾判断算法" class="headerlink" title="垃圾判断算法"></a>垃圾判断算法</h2><p>1）引用计数法</p>
-<p>缺点：无法解决循环引用的问题</p>
-<p>2）可达性分析算法</p>
-<p>可作为GC ROOT的对象：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/09/15/JVM%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
 
 
 
@@ -1064,7 +1060,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
