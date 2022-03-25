@@ -172,7 +172,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/03/25/%E4%BA%BA%E4%BD%93%E5%8A%A8%E4%BD%9C%E8%AF%86%E5%88%AB%E4%BB%BB%E5%8A%A1/" class="post-title-link" itemprop="url">人体动作识别任务</a>
+            <a href="/2022/03/25/%E4%BA%BA%E4%BD%93%E5%8A%A8%E4%BD%9C%E8%AF%86%E5%88%AB%E4%BB%BB%E5%8A%A1/" class="post-title-link" itemprop="url">Human motion recognition task</a>
         </h2>
 
         <div class="post-meta">
@@ -183,7 +183,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2022-03-25 00:00:00 / Modified: 21:09:01" itemprop="dateCreated datePublished" datetime="2022-03-25T00:00:00+08:00">2022-03-25</time>
+              <time title="Created: 2022-03-25 00:00:00 / Modified: 21:21:20" itemprop="dateCreated datePublished" datetime="2022-03-25T00:00:00+08:00">2022-03-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -206,9 +206,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="动作识别任务概述"><a href="#动作识别任务概述" class="headerlink" title="动作识别任务概述"></a>动作识别任务概述</h2><p>动作识别任务用到的方法总体上分为两种，一种是基于传统的手工提取特征方法，其主要是基于兴趣点的检测和表示，利用梯度直方图、时空兴趣点、改进型密集轨迹等构建特征进行分类，然而这种方法缺乏一定的灵活性与可扩展性；另一种方法是基于深度学习自动提取特征的方法，也是现阶段动作识别领域主流的方法，其主要有三个分支，分别是双流卷积神经网络、LSTM以及3D卷积神经网络。不同的网络模型有不同的特点与优势。</p>
-<p>在对双流卷积神经网络的研究中，Simonyan等人提出了一种分别使用RGB和叠层光流帧作为外观和运动信息的方法，表明将这两种流结合起来可以提高动作识别的精度。自这项研究以来，人们提出了许多基于双流CNN的方法来提高动作识别性能。</p>
-<p>LSTM（Long Short-Term Memory）名为长短期记忆网络，是循环神经网络（Recurrent Neural Network, RNN）的一种变体，可以利用其特有的结构处理好时间序列较长的事件。而视频中的运动是一个由几百帧甚至上千帧组成的持续过程，因此在动作识别中，如何提取物体运动的详细信息、时间跨度较大的相关性信息显得至关重要。LSTM网络之所以能在处理长时相关性事件中占据优势，主要在于LSTM单元中加入了用来处理信息的门操作，分别包括遗忘门、输入门和输出门三种。通过这种门操作，对较长时间的事件信息进行记忆，保留或者是丢弃操作，以此来动态地调整信息的状态，强化长时间信息的表达能力，而这也很符合人类对事件的认知过程。</p>
+          <h2 id="Action-recognition-task-overview"><a href="#Action-recognition-task-overview" class="headerlink" title="Action recognition task overview"></a>Action recognition task overview</h2><p>The methods used in motion recognition tasks are generally divided into two kinds. One is based on the traditional manual feature extraction method, which is mainly based on the detection and representation of interest points, and uses gradient histogram, spatio-temporal interest points, improved dense trajectories and other features to classify. However, this method lacks certain flexibility and scalability; The other method is the method of automatic feature extraction based on deep learning, which is also the mainstream method in the field of motion recognition at this stage. It mainly has three branches: dual stream convolution neural network, LSTM and 3D convolution neural network. Different network models have different characteristics and advantages.</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/03/25/%E4%BA%BA%E4%BD%93%E5%8A%A8%E4%BD%9C%E8%AF%86%E5%88%AB%E4%BB%BB%E5%8A%A1/#more" rel="contents">

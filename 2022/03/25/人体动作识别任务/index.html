@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="动作识别任务概述动作识别任务用到的方法总体上分为两种，一种是基于传统的手工提取特征方法，其主要是基于兴趣点的检测和表示，利用梯度直方图、时空兴趣点、改进型密集轨迹等构建特征进行分类，然而这种方法缺乏一定的灵活性与可扩展性；另一种方法是基于深度学习自动提取特征的方法，也是现阶段动作识别领域主流的方法，其主要有三个分支，分别是双流卷积神经网络、LSTM以及3D卷积神经网络。不同的网络模型有不同的特点与">
+  <meta name="description" content="Action recognition task overviewThe methods used in motion recognition tasks are generally divided into two kinds. One is based on the traditional manual feature extraction method, which is mainly bas">
 <meta property="og:type" content="article">
-<meta property="og:title" content="人体动作识别任务">
+<meta property="og:title" content="Human motion recognition task">
 <meta property="og:url" content="http://example.com/2022/03/25/%E4%BA%BA%E4%BD%93%E5%8A%A8%E4%BD%9C%E8%AF%86%E5%88%AB%E4%BB%BB%E5%8A%A1/index.html">
 <meta property="og:site_name" content="Eren Jaeger&#39;s blog">
-<meta property="og:description" content="动作识别任务概述动作识别任务用到的方法总体上分为两种，一种是基于传统的手工提取特征方法，其主要是基于兴趣点的检测和表示，利用梯度直方图、时空兴趣点、改进型密集轨迹等构建特征进行分类，然而这种方法缺乏一定的灵活性与可扩展性；另一种方法是基于深度学习自动提取特征的方法，也是现阶段动作识别领域主流的方法，其主要有三个分支，分别是双流卷积神经网络、LSTM以及3D卷积神经网络。不同的网络模型有不同的特点与">
+<meta property="og:description" content="Action recognition task overviewThe methods used in motion recognition tasks are generally divided into two kinds. One is based on the traditional manual feature extraction method, which is mainly bas">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-03-24T16:00:00.000Z">
-<meta property="article:modified_time" content="2022-03-25T13:09:01.325Z">
+<meta property="article:modified_time" content="2022-03-25T13:21:20.771Z">
 <meta property="article:author" content="Zhenyu Liang">
 <meta name="twitter:card" content="summary">
 
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>人体动作识别任务 | Eren Jaeger's blog</title>
+  <title>Human motion recognition task | Eren Jaeger's blog</title>
   
 
 
@@ -174,7 +174,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          人体动作识别任务
+          Human motion recognition task
         </h1>
 
         <div class="post-meta">
@@ -185,7 +185,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2022-03-25 00:00:00 / Modified: 21:09:01" itemprop="dateCreated datePublished" datetime="2022-03-25T00:00:00+08:00">2022-03-25</time>
+              <time title="Created: 2022-03-25 00:00:00 / Modified: 21:21:20" itemprop="dateCreated datePublished" datetime="2022-03-25T00:00:00+08:00">2022-03-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -208,19 +208,19 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="动作识别任务概述"><a href="#动作识别任务概述" class="headerlink" title="动作识别任务概述"></a>动作识别任务概述</h2><p>动作识别任务用到的方法总体上分为两种，一种是基于传统的手工提取特征方法，其主要是基于兴趣点的检测和表示，利用梯度直方图、时空兴趣点、改进型密集轨迹等构建特征进行分类，然而这种方法缺乏一定的灵活性与可扩展性；另一种方法是基于深度学习自动提取特征的方法，也是现阶段动作识别领域主流的方法，其主要有三个分支，分别是双流卷积神经网络、LSTM以及3D卷积神经网络。不同的网络模型有不同的特点与优势。</p>
-<p>在对双流卷积神经网络的研究中，Simonyan等人提出了一种分别使用RGB和叠层光流帧作为外观和运动信息的方法，表明将这两种流结合起来可以提高动作识别的精度。自这项研究以来，人们提出了许多基于双流CNN的方法来提高动作识别性能。</p>
-<p>LSTM（Long Short-Term Memory）名为长短期记忆网络，是循环神经网络（Recurrent Neural Network, RNN）的一种变体，可以利用其特有的结构处理好时间序列较长的事件。而视频中的运动是一个由几百帧甚至上千帧组成的持续过程，因此在动作识别中，如何提取物体运动的详细信息、时间跨度较大的相关性信息显得至关重要。LSTM网络之所以能在处理长时相关性事件中占据优势，主要在于LSTM单元中加入了用来处理信息的门操作，分别包括遗忘门、输入门和输出门三种。通过这种门操作，对较长时间的事件信息进行记忆，保留或者是丢弃操作，以此来动态地调整信息的状态，强化长时间信息的表达能力，而这也很符合人类对事件的认知过程。</p>
+        <h2 id="Action-recognition-task-overview"><a href="#Action-recognition-task-overview" class="headerlink" title="Action recognition task overview"></a>Action recognition task overview</h2><p>The methods used in motion recognition tasks are generally divided into two kinds. One is based on the traditional manual feature extraction method, which is mainly based on the detection and representation of interest points, and uses gradient histogram, spatio-temporal interest points, improved dense trajectories and other features to classify. However, this method lacks certain flexibility and scalability; The other method is the method of automatic feature extraction based on deep learning, which is also the mainstream method in the field of motion recognition at this stage. It mainly has three branches: dual stream convolution neural network, LSTM and 3D convolution neural network. Different network models have different characteristics and advantages.</p>
 <span id="more"></span>
 
-<h2 id="3DResNet"><a href="#3DResNet" class="headerlink" title="3DResNet"></a>3DResNet</h2><p>近年来，3D CNN在动作识别领域的性能水平有了显著提高。对于动作识别，时空三维（3D）卷积核CNN比二维（2D）卷积核CNN更有效，因为这种三维卷积可以直接从原始视频中提取时空特征。尽管3D内核由于其大量参数而趋于过拟合，但3D CNN通过使用最近的大型视频数据集得到了极大的改进。然而，与基于2D的CNN中非常深层的神经网络（如残差网络）的成功相比，3D CNN的体系结构相对较浅。但在后来的研究中，Hara等人提出了一种基于ResNet的3D CNN，最终实现了更好的动作表示。尽管模型的参数很多，但在Kinetics数据集上训练的3D Resnet没有出现过拟合的问题，并且与相对较浅的网络（如C3D）相比，3D Resnet取得了更好的性能。其中，Resnet（残差网络）是图像分类中最成功的体系结构之一，它提供了快捷连接，允许信号绕过一层并按顺序移动到下一层。由于这些连接通过网络的梯度流从后面的层到早期层，它们可以促进非常深的网络的训练。同时，Kataoka等人在后来的研究中也发现了3D CNN在大规模视频数据集(比如Kinetics数据集）上训练得比2D CNN更好。</p>
-<h2 id="TSM"><a href="#TSM" class="headerlink" title="TSM"></a>TSM</h2><p>TSM(Temporal Shift Module)主要解决的是传统的二维神经网络计算成本低，但不能捕获长期的时间关系，而基于3D CNN的方法可以获得良好的性能，但计算量大，部署成本高的问题。该模块具有较高的效率和较高的性能。它可以实现3D CNN的性能，但保持了2D CNN相对较小的计算量。</p>
-<p>TSM在时间维度上移动了部分通道，从而促进了相邻帧在信息之间的交流。但是这种shift操作会带来两个问题：</p>
-<p>（1）并不高效，尽管shift操作是基本zero FLOP的，但是这也同时会导致数据移动，这一步会使得延迟产生并且增加，而且尤其在视频文件中，该现象会更加显著，因为视频是5个维度的；</p>
-<p>（2）并不准确，如果shift太多的channel的话将会损坏原有帧的空间，也就是移动了，那么就不完整了，并不包含所有的该张图片本身应该具有的信息。</p>
-<p>对此，研究采取的解决方案是：</p>
-<p>（1）改进shift策略：并不是shift所有的channel，而是只选择性地shift其中的一部分，该策略能够有效的减少数据移动所带来的时间复杂度；</p>
-<p>（2）TSM并不是直接被插入到从前往后的干道中的，而是以旁路的形式进行，因此在获得了时序信息的同时不会对二维卷积的空间信息进行损害。</p>
+<p>In the study of dual stream convolution neural network, simonyan et al. proposed a method to use RGB and laminated optical flow frames as appearance and motion information respectively, which shows that the combination of these two streams can improve the accuracy of motion recognition. Since this research, many methods based on dual stream CNN have been proposed to improve the performance of motion recognition.</p>
+<p>LSTM (long short term memory), named as short-term and long-term memory network, is a variant of recurrent neural network (RNN), which can use its unique structure to deal with events with long time series. The motion in video is a continuous process composed of hundreds or even thousands of frames. Therefore, in motion recognition, how to extract the detailed information of object motion and the correlation information with large time span is very important. The reason why LSTM network can occupy an advantage in processing long-term correlation events is that the gate operation used to process information is added to the LSTM unit, including forgetting gate, input gate and output gate respectively. Through this gate operation, the long-term event information can be remembered, retained or discarded, so as to dynamically adjust the state of information and strengthen the expression ability of long-term information, which is also in line with the human cognitive process of events.</p>
+<h2 id="3DResNet"><a href="#3DResNet" class="headerlink" title="3DResNet"></a>3DResNet</h2><p>In recent years, the performance level of 3D CNN in the field of motion recognition has been significantly improved. For motion recognition, spatiotemporal three-dimensional (3D) convolution kernel CNN is more effective than two-dimensional (2D) convolution kernel CNN, because this three-dimensional convolution can directly extract spatiotemporal features from the original video. Although the 3D kernel tends to over fit due to its large number of parameters, 3D CNN has been greatly improved by using recent large video data sets. However, compared with the success of very deep neural networks (such as residual networks) in 2D based CNN, the architecture of 3D CNN is relatively shallow. However, in later research, Hara et al. proposed a 3D CNN based on RESNET, and finally achieved better action representation. Although there are many parameters of the model, the 3D RESNET trained on the dynamics dataset has not had the problem of fitting, and 3D RESNET has achieved better performance compared with relatively shallow networks (such as C3d). Among them, RESNET (residual network) is one of the most successful architectures in image classification. It provides a fast connection and allows signals to bypass one layer and move to the next layer in order. Since these connections flow through the gradient of the network from the back layer to the early layer, they can promote the training of very deep networks. At the same time, Kataoka et al. also found that 3D CNN can train better than 2D CNN on large-scale video data sets (such as sports data sets).</p>
+<h2 id="TSM"><a href="#TSM" class="headerlink" title="TSM"></a>TSM</h2><p>TSM (temporary shift module) mainly solves the problems that the traditional two-dimensional neural network has low computing cost, but can not capture the long-term time relationship, while the method based on 3D CNN can obtain good performance, but the amount of calculation is large and the deployment cost is high. The module has high efficiency and high performance. It can realize the performance of 3D CNN, but maintains a relatively small amount of computation of 2D CNN.</p>
+<p>TSM moves some channels in the time dimension, which promotes the exchange of information between adjacent frames. However, this shift operation brings two problems:</p>
+<p>(1) It is not efficient. Although the shift operation is basically zero flip, it will also lead to data movement. This step will generate and increase the delay, and this phenomenon will be more significant, especially in video files, because video is five dimensions;</p>
+<p>(2) It is not accurate. If you shift too many channels, the space of the original frame will be damaged, that is, if you move, it is incomplete and does not contain all the information that the picture itself should have.</p>
+<p>The solutions adopted in the study are:</p>
+<p>(1) Improved shift strategy: not all channels are shifted, but only some of them are selectively shifted. This strategy can effectively reduce the time complexity caused by data movement;</p>
+<p>(2) TSM is not directly inserted into the trunk road from front to back, but in the form of bypass, so it will not damage the spatial information of two-dimensional convolution while obtaining the timing information.</p>
 
     </div>
 
@@ -298,7 +298,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A8%E4%BD%9C%E8%AF%86%E5%88%AB%E4%BB%BB%E5%8A%A1%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">动作识别任务概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3DResNet"><span class="nav-number">2.</span> <span class="nav-text">3DResNet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TSM"><span class="nav-number">3.</span> <span class="nav-text">TSM</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Action-recognition-task-overview"><span class="nav-number">1.</span> <span class="nav-text">Action recognition task overview</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3DResNet"><span class="nav-number">2.</span> <span class="nav-text">3DResNet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TSM"><span class="nav-number">3.</span> <span class="nav-text">TSM</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
